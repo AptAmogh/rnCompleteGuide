@@ -8,6 +8,16 @@ const GoalInput = props => {
     setEnteredGoal(enteredText);
   };
 
+  const setGoalHandler = () => {
+    props.onAddGoal(enteredGoal);
+    setEnteredGoal('');
+  };
+
+  const cancelGoalHandler = () => {
+    props.onCancel();
+    setEnteredGoal('');
+  };
+
   return (
     <Modal visible={props.visible} animationType="slide">
       <View style={styles.inputContainer}>
@@ -19,13 +29,14 @@ const GoalInput = props => {
           } /* if you add parenthesis () in the end, then in first parse function will get executed which you don't want. you want function to execute on every keystroke */
           value={enteredGoal}
         />
-        <Button
-          title="ADD"
-          onPress={() => {
-            props.onAddGoal(enteredGoal);
-            setEnteredGoal('');
-          }}
-        />
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button title="ADD" onPress={setGoalHandler} />
+          </View>
+          <View style={styles.button}>
+            <Button title="CANCEL" color="red" onPress={cancelGoalHandler} />
+          </View>
+        </View>
       </View>
     </Modal>
   );
@@ -44,6 +55,14 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderWidth: 1,
     padding: 10,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '80%', // if you do not give width then space-between is of no use as container takes width as much required by its children
+  },
+  button: {
+    width: '40%',
   },
 });
 
