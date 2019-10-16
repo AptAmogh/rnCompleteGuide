@@ -19,7 +19,13 @@ const GoalInput = props => {
           } /* if you add parenthesis () in the end, then in first parse function will get executed which you don't want. you want function to execute on every keystroke */
           value={enteredGoal}
         />
-        <Button title="ADD" onPress={() => props.onAddGoal(enteredGoal)} />
+        <Button
+          title="ADD"
+          onPress={() => {
+            props.onAddGoal(enteredGoal);
+            setEnteredGoal('');
+          }}
+        />
       </View>
     </Modal>
   );
